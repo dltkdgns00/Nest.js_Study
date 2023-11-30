@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
@@ -41,8 +41,8 @@ export class PostsController {
 
   // 4) PATCH /posts/:id
   //    id에 해당하는 post를 수정한다.
-  @Patch(':id')
-  patchPost(
+  @Put(':id')
+  putPost(
     @Param('id') id: string,
     @Body('author') author?: string,
     @Body('title') title?: string,
