@@ -20,48 +20,48 @@ export interface PostModel {
   commentCount: number;
 }
 
-let posts: PostModel[] = [
-  {
-    id: 1,
-    author: 'newjeans_official',
-    title: '뉴진스 민지',
-    content: '멤버들 때문에 버거운 민지',
-    likeCount: 10000000,
-    commentCount: 999999,
-  },
-  {
-    id: 2,
-    author: 'newjeans_official',
-    title: '뉴진스 하니',
-    content: '한국어 공부하는 하니',
-    likeCount: 10000000,
-    commentCount: 999999,
-  },
-  {
-    id: 3,
-    author: 'newjeans_official',
-    title: '뉴진스 다니엘',
-    content: '당근 먹고 있는 다니엘',
-    likeCount: 10000000,
-    commentCount: 999999,
-  },
-  {
-    id: 4,
-    author: 'newjeans_official',
-    title: '뉴진스 해린',
-    content: '이상한 해린',
-    likeCount: 10000000,
-    commentCount: 999999,
-  },
-  {
-    id: 5,
-    author: 'newjeans_official',
-    title: '뉴진스 혜인',
-    content: '장난 치고 있는 혜인',
-    likeCount: 10000000,
-    commentCount: 999999,
-  },
-];
+// let posts: PostModel[] = [
+//   {
+//     id: 1,
+//     author: 'newjeans_official',
+//     title: '뉴진스 민지',
+//     content: '멤버들 때문에 버거운 민지',
+//     likeCount: 10000000,
+//     commentCount: 999999,
+//   },
+//   {
+//     id: 2,
+//     author: 'newjeans_official',
+//     title: '뉴진스 하니',
+//     content: '한국어 공부하는 하니',
+//     likeCount: 10000000,
+//     commentCount: 999999,
+//   },
+//   {
+//     id: 3,
+//     author: 'newjeans_official',
+//     title: '뉴진스 다니엘',
+//     content: '당근 먹고 있는 다니엘',
+//     likeCount: 10000000,
+//     commentCount: 999999,
+//   },
+//   {
+//     id: 4,
+//     author: 'newjeans_official',
+//     title: '뉴진스 해린',
+//     content: '이상한 해린',
+//     likeCount: 10000000,
+//     commentCount: 999999,
+//   },
+//   {
+//     id: 5,
+//     author: 'newjeans_official',
+//     title: '뉴진스 혜인',
+//     content: '장난 치고 있는 혜인',
+//     likeCount: 10000000,
+//     commentCount: 999999,
+//   },
+// ];
 
 @Injectable()
 export class PostsService {
@@ -142,14 +142,18 @@ export class PostsService {
     return newPost;
   }
 
-  deletePost(postId: number) {
-    const post = posts.find((post) => post.id === postId);
+  async deletePost(postId: number) {
+    const post = await this.postsRepository.findOne({
+      where: {
+        id: postId,
+      },
+    });
 
     if (!post) {
       throw new NotFoundException();
     }
 
-    posts = posts.filter((post) => post.id !== postId);
+    await this.postsRepository.delete(postId);
 
     return postId;
   }
