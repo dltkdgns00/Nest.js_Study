@@ -12,19 +12,12 @@ export class AppController {
 
   @Post('users')
   postUser() {
-    return this.userRepository.save({
-      // title: 'test',
-    });
+    return this.userRepository.save({});
   }
 
   @Get('users')
   getUsers() {
-    return this.userRepository.find({
-      select: {
-        id: true,
-        title: true,
-      },
-    });
+    return this.userRepository.find();
   }
 
   @Patch('users/:id')
