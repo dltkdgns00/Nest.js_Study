@@ -71,11 +71,18 @@ export class PostsService {
   ) {}
 
   async getAllPosts() {
-    return this.postsRepository.find();
+    return this.postsRepository.find({
+      relations: {
+        author: true,
+      },
+    });
   }
 
   async getPostById(id: number) {
     const post = await this.postsRepository.findOne({
+      relations: {
+        author: true,
+      },
       where: {
         id,
       },
