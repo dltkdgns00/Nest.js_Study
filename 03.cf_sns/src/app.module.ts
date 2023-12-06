@@ -10,6 +10,7 @@ import { UsersModel } from './users/entities/users.entity';
 @Module({
   imports: [
     PostsModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       // 데이터베이스 타입
       type: 'postgres',
@@ -21,7 +22,6 @@ import { UsersModel } from './users/entities/users.entity';
       entities: [PostsModel, UsersModel],
       synchronize: true,
     }),
-    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

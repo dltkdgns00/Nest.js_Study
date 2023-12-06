@@ -32,7 +32,7 @@ export class PostsController {
   //    새로운 post를 생성한다.
   @Post()
   postPosts(
-    @Body('author') authorId: number,
+    @Body('authorId') authorId: number,
     @Body('title') title: string,
     @Body('content') content: string,
   ) {
