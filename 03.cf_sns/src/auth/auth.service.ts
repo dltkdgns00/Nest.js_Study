@@ -84,5 +84,13 @@ export class AuthService {
     if (!passOk) {
       throw new UnauthorizedException('비밀번호가 일치하지 않습니다.');
     }
+
+    return existingUser;
+  }
+
+  async loginWithEmail(user: Pick<UsersModel, 'email' | 'password'>) {
+    const existingUser = await this.authenticateWithEmailAndPassword(user);
+
+    return this.loginUser(existingUser);
   }
 }
