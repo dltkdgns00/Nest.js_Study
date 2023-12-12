@@ -25,4 +25,10 @@ export class UsersService {
 
     return newUser;
   }
+
+  async getUserByEmail(email: string) {
+    return this.usersRepository.findOne({
+      where: { email },
+    });
+  }
 }
