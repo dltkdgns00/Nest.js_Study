@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  // DefaultValuePipe,
   Delete,
   Get,
   Param,
@@ -36,6 +37,7 @@ export class PostsController {
     @Body('authorId') authorId: number,
     @Body('title') title: string,
     @Body('content') content: string,
+    // @Body('isPublic', new DefaultValuePipe(true)) isPublic: boolean, // 기본값을 true로 설정 - 강의에서 테스트를 위해 추가
   ) {
     return this.postsService.createPost(authorId, title, content);
   }
