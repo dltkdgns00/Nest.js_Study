@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { RolesEnum } from '../const/roles.const';
 import { PostsModel } from 'src/posts/entities/posts.entity';
 
@@ -12,6 +19,10 @@ import { PostsModel } from 'src/posts/entities/posts.entity';
  * password: string;
  *
  * role: [RolesEnum.USER, RolesEnum.ADMIN]
+ *
+ * createdAt: Date;
+ *
+ * updatedAt: Date;
  */
 
 @Entity()
@@ -46,4 +57,10 @@ export class UsersModel {
 
   @OneToMany(() => PostsModel, (post) => post.author)
   posts: PostsModel[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
