@@ -7,7 +7,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('token/access')
-  postTokenAccess(@Headers('authorization') rawToken: string) {
+  postTokenAccess(@Headers('Authorization') rawToken: string) {
     const token = this.authService.extractTokenFromHeader(rawToken, true);
 
     const newToken = this.authService.rotateToken(token, false);
@@ -19,7 +19,7 @@ export class AuthController {
   }
 
   @Post('token/refresh')
-  postTokenRefresh(@Headers('authorization') rawToken: string) {
+  postTokenRefresh(@Headers('Authorization') rawToken: string) {
     const token = this.authService.extractTokenFromHeader(rawToken, true);
 
     const newToken = this.authService.rotateToken(token, true);
@@ -31,7 +31,7 @@ export class AuthController {
   }
 
   @Post('login/email')
-  postLoginEmail(@Headers('authorization') rawToken: string) {
+  postLoginEmail(@Headers('Authorization') rawToken: string) {
     // email:password -> base64
     // base64 -> email:password
     const token = this.authService.extractTokenFromHeader(rawToken, false);
